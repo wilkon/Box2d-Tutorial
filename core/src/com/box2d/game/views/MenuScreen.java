@@ -20,7 +20,10 @@ public class MenuScreen implements Screen {
 
         // any input will send a request from stage for response
         Gdx.input.setInputProcessor(stage);
+    }
 
+    @Override
+    public void show() {
         // serves almost as a grid
         Table table = new Table();
         table.setFillParent(true);
@@ -41,25 +44,17 @@ public class MenuScreen implements Screen {
         table.add(preferences).fillX().uniformX();
         table.row();
         table.add(exit).fillX().uniformX();
-
-
-        // act asks our stage to perform as we "draw" the curtains
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
-                    // ^ maximum frame rate with this MathMin function
-
-        stage.draw();
-    }
-
-    @Override
-    public void show() {
-
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 30f));
+
+        // act asks our stage to perform as we "draw" the curtains
+        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
+        // ^ maximum frame rate with this MathMin function
+
         stage.draw();
     }
 
