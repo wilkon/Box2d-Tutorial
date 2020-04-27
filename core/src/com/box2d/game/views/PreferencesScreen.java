@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -50,6 +51,16 @@ public class PreferencesScreen implements Screen {
             }
         });
 
+        final CheckBox musicCheckBox = new CheckBox(null, skin);
+        musicCheckBox.setChecked(parent.getPreferences().isMusicEnabled());
+        musicCheckBox.addListener(new EventListener() {
+            @Override
+            public boolean handle(Event event){
+                boolean enabled = musicCheckBox.isChecked();
+                parent.getPreferences().setMusicEnabled(enabled);
+                return false;
+            }
+        });
     }
 
     @Override
