@@ -1,8 +1,6 @@
 package com.box2d.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.box2d.game.views.*;
 
 import static com.box2d.game.constants.GameViews.*;
@@ -23,8 +21,7 @@ public class Box2dTutorial extends Game {
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		super.render();
 	}
 
 	public void switchScreen(int screen){
