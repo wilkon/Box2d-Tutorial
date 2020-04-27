@@ -22,8 +22,6 @@ public class MenuScreen implements Screen {
         this.parent = parent;
         this.stage = new Stage(new ScreenViewport());
 
-        // any input will send a request from stage for response
-        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -33,6 +31,9 @@ public class MenuScreen implements Screen {
         table.setFillParent(true);
         table.setDebug(true);
         stage.addActor(table);
+
+        // any input will send a request from stage for response
+        Gdx.input.setInputProcessor(stage);
 
         Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
 
