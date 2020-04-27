@@ -94,6 +94,22 @@ public class PreferencesScreen implements Screen {
         volumeSoundLabel = new Label("Sound Volume", skin);
         musicOnOffLabel = new Label("Music", skin);
         soundOnOffLabel = new Label("Sound", skin);
+
+        table.add(titleLabel);
+        table.row();
+        table.add(volumeMusicLabel);
+        table.add(volumeMusicSlider);
+        table.row();
+        table.add(musicOnOffLabel);
+        table.add(musicCheckBox);
+        table.row();
+        table.add(volumeSoundLabel);
+        table.add(volumeSoundSlider);
+        table.row();
+        table.add(soundOnOffLabel);
+        table.add(soundCheckBox);
+        table.row();
+        table.add(backButton);
     }
 
     @Override
