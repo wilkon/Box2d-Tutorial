@@ -32,7 +32,7 @@ public class AppPreferences {
         getPrefs().flush();
     }
 
-    public float getPrefMusicVolume() {
+    public float getMusicVolume() {
         return getPrefs().getFloat(PREF_MUSIC_VOLUME, 0.5f);
     }
 
