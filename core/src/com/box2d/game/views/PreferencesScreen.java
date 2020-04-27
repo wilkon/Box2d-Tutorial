@@ -33,8 +33,9 @@ public class PreferencesScreen implements Screen {
     public void show() {
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
         stage.addActor(table);
+
+        Gdx.input.setInputProcessor(stage);
 
         Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
 
@@ -89,7 +90,7 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        titleLabel = new Label("Preferences", skin);
+        titleLabel = new Label("Preferences", skin, "pressed");
         volumeMusicLabel = new Label("Music Volume", skin);
         volumeSoundLabel = new Label("Sound Volume", skin);
         musicOnOffLabel = new Label("Music", skin);
@@ -97,17 +98,17 @@ public class PreferencesScreen implements Screen {
 
         table.add(titleLabel);
         table.row();
-        table.add(volumeMusicLabel);
+        table.add(volumeMusicLabel).left();
         table.add(volumeMusicSlider);
         table.row();
-        table.add(musicOnOffLabel);
-        table.add(musicCheckBox);
+        table.add(musicOnOffLabel).left();
+        table.add(musicCheckBox).right();
         table.row();
-        table.add(volumeSoundLabel);
+        table.add(volumeSoundLabel).left();
         table.add(volumeSoundSlider);
         table.row();
-        table.add(soundOnOffLabel);
-        table.add(soundCheckBox);
+        table.add(soundOnOffLabel).left();
+        table.add(soundCheckBox).right();
         table.row();
         table.add(backButton);
     }
@@ -116,8 +117,6 @@ public class PreferencesScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        Gdx.input.setInputProcessor(stage);
 
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1/30f));
         stage.draw();
