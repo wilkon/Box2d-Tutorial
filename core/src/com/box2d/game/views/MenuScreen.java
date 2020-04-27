@@ -3,12 +3,16 @@ package com.box2d.game.views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.box2d.game.Box2dTutorial;
+
+import static com.box2d.game.constants.GameViews.*;
 
 public class MenuScreen implements Screen {
     private Box2dTutorial parent;
@@ -44,6 +48,27 @@ public class MenuScreen implements Screen {
         table.add(preferences).fillX().uniformX();
         table.row();
         table.add(exit).fillX().uniformX();
+
+        exit.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                Gdx.app.exit();
+            }
+        });
+
+        newGame.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.switchScreen(APPLICATION);
+            }
+        });
+
+        preferences.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.switchScreen(PREFERENCES);
+            }
+        });
     }
 
     @Override
