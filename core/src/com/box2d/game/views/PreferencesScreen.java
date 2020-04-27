@@ -18,6 +18,12 @@ public class PreferencesScreen implements Screen {
     private Box2dTutorial parent;
     private Stage stage;
 
+    private Label titleLabel;
+    private Label volumeMusicLabel;
+    private Label volumeSoundLabel;
+    private Label musicOnOffLabel;
+    private Label soundOnOffLabel;
+
     public PreferencesScreen(Box2dTutorial parent){
         this.parent = parent;
         stage = new Stage(new ScreenViewport());
@@ -74,7 +80,7 @@ public class PreferencesScreen implements Screen {
             }
         });
 
-        final TextButton backButton = new TextButton("Back", skin, "small");
+        final TextButton backButton = new TextButton("Back", skin);
 
         backButton.addListener(new ChangeListener(){
             @Override
@@ -82,6 +88,12 @@ public class PreferencesScreen implements Screen {
                 parent.switchScreen(MENU);
             }
         });
+
+        titleLabel = new Label("Preferences", skin);
+        volumeMusicLabel = new Label("Music Volume", skin);
+        volumeSoundLabel = new Label("Sound Volume", skin);
+        musicOnOffLabel = new Label("Music", skin);
+        soundOnOffLabel = new Label("Sound", skin);
     }
 
     @Override
