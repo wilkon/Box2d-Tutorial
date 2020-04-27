@@ -1,8 +1,15 @@
 package com.box2d.game.views;
 
 import com.badlogic.gdx.Screen;
+import com.box2d.game.Box2dTutorial;
 
 public class MainScreen implements Screen {
+    private Box2dTutorial parent;
+
+    public MainScreen(Box2dTutorial parent){
+        this.parent = parent;
+    }
+
     @Override
     public void show() {
 

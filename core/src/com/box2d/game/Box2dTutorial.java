@@ -31,22 +31,22 @@ public class Box2dTutorial extends Game {
 		switch(screen){
 			case MENU :
 				if(menuScreen == null)
-					menuScreen = new MenuScreen();
+					menuScreen = new MenuScreen(this);
 				this.setScreen(menuScreen);
 				break;
 			case PREFERENCES :
 				if(preferencesScreen == null)
-					preferencesScreen = new PreferencesScreen();
+					preferencesScreen = new PreferencesScreen(this);
 				this.setScreen(preferencesScreen);
 				break;
 			case APPLICATION :
 				if(mainScreen == null)
-					mainScreen = new MainScreen();
+					mainScreen = new MainScreen(this);
 				this.setScreen(mainScreen);
 				break;
 			case ENDGAME :
 				if(endScreen == null)
-					endScreen = new EndScreen();
+					endScreen = new EndScreen(this);
 				this.setScreen(endScreen);
 				break;
 		}

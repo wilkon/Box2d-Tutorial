@@ -1,8 +1,15 @@
 package com.box2d.game.views;
 
 import com.badlogic.gdx.Screen;
+import com.box2d.game.Box2dTutorial;
 
 public class MenuScreen implements Screen {
+    private Box2dTutorial parent;
+
+    public MenuScreen(Box2dTutorial parent){
+        this.parent = parent;
+    }
+
     @Override
     public void show() {
 
