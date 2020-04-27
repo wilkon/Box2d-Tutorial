@@ -19,6 +19,7 @@ public class Box2dTutorial extends Game {
 	@Override
 	public void create () {
 		loadingScreen = new LoadingScreen(this);
+		appPreferences=new AppPreferences();
 		setScreen(loadingScreen);
 	}
 
