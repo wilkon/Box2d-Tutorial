@@ -40,6 +40,16 @@ public class PreferencesScreen implements Screen {
             }
         });
 
+        final Slider volumeSoundSlider = new Slider( 0f, 1f, 0.1f, false, skin);
+        volumeSoundSlider.setValue(parent.getPreferences().getSoundVolume());
+        volumeSoundSlider.addListener(new EventListener(){
+            @Override
+            public boolean handle(Event event){
+                parent.getPreferences().setMusicVolume(volumeSoundSlider.getValue());
+                return false;
+            }
+        });
+
     }
 
     @Override
