@@ -1,6 +1,7 @@
 package com.box2d.game;
 
 import com.badlogic.gdx.Game;
+import com.box2d.game.preferences.AppPreferences;
 import com.box2d.game.views.*;
 
 import static com.box2d.game.constants.GameViews.*;
@@ -12,6 +13,8 @@ public class Box2dTutorial extends Game {
 	private MenuScreen menuScreen;
 	private MainScreen mainScreen;
 	private EndScreen endScreen;
+
+	private AppPreferences appPreferences;
 	
 	@Override
 	public void create () {
@@ -47,6 +50,10 @@ public class Box2dTutorial extends Game {
 				this.setScreen(endScreen);
 				break;
 		}
+	}
+
+	public AppPreferences getPreferences(){
+		return appPreferences;
 	}
 
 	@Override
