@@ -61,6 +61,17 @@ public class PreferencesScreen implements Screen {
                 return false;
             }
         });
+
+        final CheckBox soundCheckBox = new CheckBox(null, skin);
+        soundCheckBox.setChecked(parent.getPreferences().isSoundEffectsEnabled());
+        soundCheckBox.addListener(new EventListener(){
+            @Override
+            public boolean handle(Event event){
+                boolean enabled = soundCheckBox.isChecked();
+                parent.getPreferences().setSoundEffectEnabled(enabled);
+                return false;
+            }
+        });
     }
 
     @Override
