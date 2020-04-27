@@ -3,15 +3,16 @@ package com.box2d.game.views;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.box2d.game.Box2dTutorial;
+
+import static com.box2d.game.constants.GameViews.*;
 
 public class PreferencesScreen implements Screen {
     private Box2dTutorial parent;
@@ -70,6 +71,15 @@ public class PreferencesScreen implements Screen {
                 boolean enabled = soundCheckBox.isChecked();
                 parent.getPreferences().setSoundEffectEnabled(enabled);
                 return false;
+            }
+        });
+
+        final TextButton backButton = new TextButton("Back", skin, "small");
+
+        backButton.addListener(new ChangeListener(){
+            @Override
+            public void changed(ChangeEvent event, Actor actor){
+                parent.switchScreen(MENU);
             }
         });
     }
