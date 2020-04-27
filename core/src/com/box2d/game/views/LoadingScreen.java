@@ -4,6 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.box2d.game.Box2dTutorial;
 
+import static com.box2d.game.constants.GameViews.*;
+
 public class LoadingScreen implements Screen {
     private Box2dTutorial parent;
 
@@ -18,7 +20,7 @@ public class LoadingScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+        parent.switchScreen(MENU);
     }
 
     @Override
