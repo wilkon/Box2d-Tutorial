@@ -1,33 +1,59 @@
 package com.box2d.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.box2d.game.views.*;
 
-public class Box2dTutorial extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+import static com.box2d.game.constants.GameViews.*;
+
+public class Box2dTutorial extends Game {
+
+	private LoadingScreen loadingScreen;
+	private PreferencesScreen preferencesScreen;
+	private MenuScreen menuScreen;
+	private MainScreen mainScreen;
+	private EndScreen endScreen;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
 	}
-	
+
+	public void switchScreen(int screen){
+		switch(screen){
+			case MENU :
+				if(menuScreen == null)
+					menuScreen = new MenuScreen();
+				this.setScreen(menuScreen);
+				break;
+			case PREFERENCES :
+				if(preferencesScreen == null)
+					preferencesScreen = new PreferencesScreen();
+				this.setScreen(preferencesScreen);
+				break;
+			case APPLICATION :
+				if(mainScreen == null)
+					mainScreen = new MainScreen();
+				this.setScreen(mainScreen);
+				break;
+			case ENDGAME :
+				if(endScreen == null)
+					endScreen = new EndScreen();
+				this.setScreen(endScreen);
+				break;
+		}
+	}
+
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+
 	}
 }
