@@ -17,7 +17,7 @@ public class MainScreen implements Screen {
 
     Box2DDebugRenderer debugRenderer;
 
-    private Body bodyd;
+    private Body bodyd, bodys;
 
     public MainScreen(Box2dTutorial parent){
         this.parent = parent;
@@ -47,7 +47,21 @@ public class MainScreen implements Screen {
 
         //align our body with a physical object
         bodyd.createFixture(shape, 0.0f);
-        
+
+        shape.dispose();
+    }
+
+    private void createFloor(){
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(0, -10);
+
+        bodys = world.createBody(bodyDef);
+
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(50, 1);
+
+        bodys.createFixture(shape, 0.0f);
         shape.dispose();
     }
 
