@@ -80,4 +80,30 @@ public class BodyFactory {
                 BodyDef.BodyType.DynamicBody, true);
     }
 
+    public Body makeBoxPolyBody(float posx, float posy,
+                                float width, float height,
+                                int material, BodyDef.BodyType bodyType, boolean fixedRotation){
+
+        BodyDef boxBodyDef = new BodyDef();
+        boxBodyDef.type = bodyType;
+        boxBodyDef.position.x = posx;
+        boxBodyDef.position.y = posy;
+        boxBodyDef.fixedRotation = fixedRotation;
+
+        Body boxBody = world.createBody(boxBodyDef);
+        PolygonShape poly = new PolygonShape();
+        poly.setAsBox(width/2, height/2);
+        boxBody.createFixture(makeFixture(material, poly));
+        poly.dispose();
+
+        return boxBody;
+    }
+
+    /** body with without fixed rotation */
+    public Body makeBoxPolyBody(float posx, float posy,
+                                float width, float height,
+                                int material, BodyDef.BodyType bodyType){
+        return makeBoxPolyBody(posx, posy, width, height, material, bodyType, false);
+    }
+
 }
