@@ -1,8 +1,6 @@
 package com.box2d.game.factories;
 
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.Shape;
-import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.physics.box2d.*;
 
 public class BodyFactory {
     public static final int STEEL = 0;
@@ -57,6 +55,29 @@ public class BodyFactory {
         }
 
         return fixtureDef;
+    }
+
+    public Body makeCirclePolyBody(float posx, float posy, float radius, int material,
+                                   BodyDef.BodyType bodyType, boolean fixedRotation){
+        BodyDef boxBodyDef = new BodyDef();
+        boxBodyDef.type = bodyType;
+        boxBodyDef.position.x = posx;
+        boxBodyDef.position.y = posy;
+        boxBodyDef.fixedRotation = fixedRotation;
+
+        Body boxBody = world.createBody(boxBodyDef);
+        CircleShape circleShape = new CircleShape();
+        circleShape.setRadius(radius / 2);
+        boxBody.createFixture(makeFixture(material, circleShape));
+        circleShape.dispose();
+        return boxBody;
+    }
+
+    /** with dynamic body and fixed rotation */
+    public Body makeCirclePolyBody(float posx, float posy, float radius, int material){
+        return makeCirclePolyBody(posx, posy,
+                radius, material,
+                BodyDef.BodyType.DynamicBody, true);
     }
 
 }
