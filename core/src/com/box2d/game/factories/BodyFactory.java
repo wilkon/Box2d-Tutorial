@@ -11,6 +11,8 @@ public class BodyFactory {
 
     private World world;
 
+    private final float DEG_TO_RAD = 0.0174533f;
+
     private static BodyFactory thisInstance;
 
     private BodyFactory(World world){
@@ -122,5 +124,26 @@ public class BodyFactory {
         polyBody.createFixture(makeFixture(material, polygon));
 
         return polyBody;
+    }
+
+    public void makeConSensor(Body body, float size){
+        FixtureDef fixtureDef = new FixtureDef();
+        // fixtureDef.isSensor = true; // using later on
+
+        PolygonShape polygon = new PolygonShape();
+
+        float radius = size;
+        Vector2[] vertices = new Vector2[5];
+        vertices[0] = new Vector2(0, 0);
+        for(int i=2; i< 6; i++){
+            float angle = (float) (i / 6.0 * 145 * DEG_TO_RAD);
+            vertices[i-1] = new Vector2(
+                    radius * ((float)Math.cos(angle)),
+                    radius * ((float)Math.sin(angle)));
+        }
+        polygon.set(vertices);
+        fixtureDef.shape = polygon;
+        body.createFixture(fixtureDef);
+        polygon.dispose();
     }
 }
