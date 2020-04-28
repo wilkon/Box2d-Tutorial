@@ -1,5 +1,6 @@
 package com.box2d.game.factories;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 
 public class BodyFactory {
@@ -106,4 +107,20 @@ public class BodyFactory {
         return makeBoxPolyBody(posx, posy, width, height, material, bodyType, false);
     }
 
+    // allowing a combination of several polygons to create one convex version
+    // keep in mind the Convex (clean edges) vs Concave (dips on edges)
+    public Body makePolygonShapeBody(Vector2[] vertices, float posx, float posy,
+                                     int material, BodyDef.BodyType bodyType){
+        BodyDef polyBodyDef = new BodyDef();
+        polyBodyDef.type = bodyType;
+        polyBodyDef.position.x = posx;
+        polyBodyDef.position.y = posy;
+        Body polyBody = world.createBody(polyBodyDef);
+
+        PolygonShape polygon = new PolygonShape();
+        polygon.set(vertices);
+        polyBody.createFixture(makeFixture(material, polygon));
+
+        return polyBody;
+    }
 }
