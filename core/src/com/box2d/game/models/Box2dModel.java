@@ -2,6 +2,9 @@ package com.box2d.game.models;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.box2d.game.factories.BodyFactory;
+
+import static com.box2d.game.factories.BodyFactory.*;
 
 public class Box2dModel {
     public World world;
@@ -13,6 +16,17 @@ public class Box2dModel {
         createFloor();
         createObject();
         createMovingObject();
+
+        BodyFactory bodyFactory = BodyFactory.getInstance(world);
+
+        bodyFactory.makeCirclePolyBody(
+                1, 1, 2, RUBBER);
+
+        bodyFactory.makeCirclePolyBody(
+                4, 1, 2, STEEL);
+
+        bodyFactory.makeCirclePolyBody(
+                -4, 1, 2, STONE);
     }
 
     public void logicStep(float delta){
