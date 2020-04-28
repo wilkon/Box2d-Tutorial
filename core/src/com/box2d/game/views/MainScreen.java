@@ -17,8 +17,6 @@ public class MainScreen implements Screen {
 
     Box2DDebugRenderer debugRenderer;
 
-    private Body bodyd, bodys, bodyk;
-
     public MainScreen(Box2dTutorial parent){
         this.parent = parent;
         model = new Box2dModel();
@@ -26,64 +24,6 @@ public class MainScreen implements Screen {
         debugRenderer = new Box2DDebugRenderer(true, true, true,
                 true,true, true);
         this.world = model.world;
-    }
-
-    private void createObject(){
-
-        // Dynamic Bodies - affected by gravity and other bodies.
-        // used for player/enemies
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(0, 0);
-
-        bodyd = world.createBody(bodyDef);
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1,1);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
-
-        //align our body with a physical object
-        bodyd.createFixture(shape, 0.0f);
-
-        shape.dispose();
-    }
-
-    private void createFloor(){
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.StaticBody;
-        bodyDef.position.set(0, -10);
-
-        bodys = world.createBody(bodyDef);
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(50, 1);
-
-        bodys.createFixture(shape, 0.0f);
-        shape.dispose();
-    }
-
-    private void createMovingObject(){
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(0, -12);
-
-        bodyk = world.createBody(bodyDef);
-
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(1,1);
-
-        FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = shape;
-        fixtureDef.density = 1f;
-
-        bodyk.createFixture(shape, 0.0f);
-
-        shape.dispose();
-
-        bodyk.setLinearVelocity(0, 0.75f);
     }
 
     @Override
