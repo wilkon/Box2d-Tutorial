@@ -2,6 +2,7 @@ package com.box2d.game;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.box2d.game.models.Box2dModel;
 
 public class Box2dContactListener implements ContactListener {
@@ -21,10 +22,18 @@ public class Box2dContactListener implements ContactListener {
         Fixture fb = contact.getFixtureB();
         System.out.println(fa.getBody().getType() + " has hit " + fb.getBody().getType());
 
-        if(fa.getBody().getType() == BodyDef.BodyType.StaticBody){
-            System.out.println("Using The Force.");
-            fb.getBody().applyForceToCenter(new Vector2(-100000, - 100000), true);
+        if(fa.getBody().getType() == BodyType.StaticBody){
+            this.trampoline(fa, fb);
+        }else if(fb.getBody().getType() == BodyType.StaticBody){
+            this.trampoline(fb, fa);
+        }else{
+            
         }
+    }
+
+    private void trampoline(Fixture staticFixture, Fixture otherFixture){
+        System.out.println("force up");
+        otherFixture.getBody().applyForceToCenter(new Vector2(-100000, -100000), true);
     }
 
     @Override
