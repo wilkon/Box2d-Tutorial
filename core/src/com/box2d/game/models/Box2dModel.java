@@ -2,6 +2,7 @@ package com.box2d.game.models;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dContactListener;
 import com.box2d.game.controllers.KeyboardController;
@@ -33,6 +34,7 @@ public class Box2dModel {
         player = bodyFactory.makeBoxPolyBody(1, 1,
                 2, 2, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody, false);
 
+
         Body water = bodyFactory.makeBoxPolyBody(1, -8,
                 40, 20, RUBBER, BodyDef.BodyType.StaticBody);
         water.setUserData("IAMTHESEA");
@@ -51,10 +53,24 @@ public class Box2dModel {
             player.applyForceToCenter(0, -10, true);
         }
 
+        if(controller.isMouse1Down && pointIntersectsBody(player, controller.mouseLocation)){
+            System.out.println("that hurts!");
+        }
+
         if(isSwimming){
             player.applyForceToCenter(0, 40, true);
         }
         world.step(delta, 3, 3);
+    }
+
+    public boolean pointIntersectsBody(Body body, Vector2 mouseLocation){
+        Vector3 mousePosition = new Vector3(mouseLocation, 0);
+
+        camera.unproject(mousePosition);
+        if(body.getFixtureList().first().testPoint(mousePosition.x, mousePosition.y)){
+            return true;
+        }
+        return false;
     }
 
     private void createObject(){
