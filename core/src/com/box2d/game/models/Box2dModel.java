@@ -14,7 +14,7 @@ public class Box2dModel {
     public World world;
 
     private Body bodyd, bodys, bodyk;
-    private Body player;
+    public Body player;
     private KeyboardController controller;
     private OrthographicCamera camera;
 
