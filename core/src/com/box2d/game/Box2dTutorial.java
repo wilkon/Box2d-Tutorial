@@ -15,6 +15,7 @@ public class Box2dTutorial extends Game {
 	private EndScreen endScreen;
 
 	private AppPreferences appPreferences;
+
 	
 	@Override
 	public void create () {

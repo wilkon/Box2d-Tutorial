@@ -34,7 +34,6 @@ public class Box2dModel {
         player = bodyFactory.makeBoxPolyBody(1, 1,
                 2, 2, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody, false);
 
-
         Body water = bodyFactory.makeBoxPolyBody(1, -8,
                 40, 20, RUBBER, BodyDef.BodyType.StaticBody);
         water.setUserData("IAMTHESEA");

@@ -3,7 +3,7 @@ package com.box2d.game.loaders;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 
-public class AssetLoader {
+public class B2dAssetLoader {
     public final AssetManager manager = new AssetManager();
 
     public final String playerImage = "images/player.png";
