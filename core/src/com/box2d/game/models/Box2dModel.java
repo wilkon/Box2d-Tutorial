@@ -16,16 +16,10 @@ public class Box2dModel {
         this.world = new World(new Vector2(0, -10f), true);
         world.setContactListener(new Box2dContactListener(this));
         createFloor();
-        createObject();
-        createMovingObject();
 
         BodyFactory bodyFactory = BodyFactory.getInstance(world);
 
-        bodyFactory.makeCirclePolyBody(
-                1, 1, 2, RUBBER);
 
-        bodyFactory.makeCirclePolyBody(
-                4, 1, 2, STEEL);
 
         bodyFactory.makeCirclePolyBody(
                 -4, 1, 2, STONE);
