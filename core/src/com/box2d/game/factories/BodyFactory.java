@@ -146,4 +146,10 @@ public class BodyFactory {
         body.createFixture(fixtureDef);
         polygon.dispose();
     }
+
+    public void makeAllFixturesSensors(Body body){
+        for(Fixture fix : body.getFixtureList()){
+            fix.setSensor(true);
+        }
+    }
 }

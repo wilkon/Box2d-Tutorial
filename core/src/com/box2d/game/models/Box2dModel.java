@@ -12,6 +12,8 @@ public class Box2dModel {
 
     private Body bodyd, bodys, bodyk;
 
+    public boolean isSwimming = false;
+
     public Box2dModel(){
         this.world = new World(new Vector2(0, -10f), true);
         world.setContactListener(new Box2dContactListener(this));
@@ -20,12 +22,17 @@ public class Box2dModel {
         BodyFactory bodyFactory = BodyFactory.getInstance(world);
 
 
+        Body water = bodyFactory.makeBoxPolyBody(1, -8,
+                40, 4, RUBBER, BodyDef.BodyType.StaticBody);
+        water.setUserData("IAMTHESEA");
 
-        bodyFactory.makeCirclePolyBody(
-                -4, 1, 2, STONE);
+        bodyFactory.makeAllFixturesSensors(water);
     }
 
     public void logicStep(float delta){
+        if(isSwimming){
+            player.applyForceToCenter(0, 50, true);
+        }
         world.step(delta, 3, 3);
     }
 
