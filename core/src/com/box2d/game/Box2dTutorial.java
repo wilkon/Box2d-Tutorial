@@ -1,6 +1,7 @@
 package com.box2d.game;
 
 import com.badlogic.gdx.Game;
+import com.box2d.game.loaders.B2dAssetLoader;
 import com.box2d.game.preferences.AppPreferences;
 import com.box2d.game.views.*;
 
@@ -16,6 +17,7 @@ public class Box2dTutorial extends Game {
 
 	private AppPreferences appPreferences;
 
+	public B2dAssetLoader assMan = new B2dAssetLoader();
 	
 	@Override
 	public void create () {
