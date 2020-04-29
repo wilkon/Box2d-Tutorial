@@ -10,7 +10,7 @@ public class KeyboardController implements InputProcessor {
 
     public boolean isMouse1Down, isMouse2Down, isMouse3Down;
     public boolean isDragged;
-    public Vector2 mouseLocation;
+    public Vector2 mouseLocation = new Vector2();
 
     @Override
     public boolean keyDown(int keycode) {
