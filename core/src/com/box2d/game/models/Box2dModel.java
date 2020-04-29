@@ -3,6 +3,7 @@ package com.box2d.game.models;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dContactListener;
+import com.box2d.game.controllers.KeyboardController;
 import com.box2d.game.factories.BodyFactory;
 
 import static com.box2d.game.factories.BodyFactory.*;
@@ -12,10 +13,12 @@ public class Box2dModel {
 
     private Body bodyd, bodys, bodyk;
     private Body player;
+    private KeyboardController controller;
 
     public boolean isSwimming = false;
 
-    public Box2dModel(){
+    public Box2dModel(KeyboardController cont){
+        controller = cont;
         this.world = new World(new Vector2(0, -10f), true);
         world.setContactListener(new Box2dContactListener(this));
         createFloor();
