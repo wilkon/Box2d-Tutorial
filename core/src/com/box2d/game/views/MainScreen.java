@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dTutorial;
 import com.box2d.game.controllers.KeyboardController;
@@ -19,10 +20,13 @@ public class MainScreen implements Screen {
 
     Box2DDebugRenderer debugRenderer;
 
+    Texture playerText;
+
     public MainScreen(Box2dTutorial parent){
         this.parent = parent;
         parent.assMan.queueAddImages();
         parent.assMan.manager.finishLoading();
+        playerText = parent.assMan.manager.get("images/player.png");
         controller = new KeyboardController();
         camera = new OrthographicCamera(32, 24);
         model = new Box2dModel(controller, camera);
