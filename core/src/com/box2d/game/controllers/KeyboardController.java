@@ -5,10 +5,7 @@ import com.badlogic.gdx.InputProcessor;
 import static com.badlogic.gdx.Input.Keys.*;
 
 public class KeyboardController implements InputProcessor {
-    public boolean left;
-    public boolean right;
-    public boolean up;
-    public boolean down;
+    public boolean left, right, up, down;
 
     @Override
     public boolean keyDown(int keycode) {
