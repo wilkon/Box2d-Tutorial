@@ -31,15 +31,25 @@ public class Box2dModel {
                 2, 2, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody, false);
 
         Body water = bodyFactory.makeBoxPolyBody(1, -8,
-                40, 4, RUBBER, BodyDef.BodyType.StaticBody);
+                40, 20, RUBBER, BodyDef.BodyType.StaticBody);
         water.setUserData("IAMTHESEA");
 
         bodyFactory.makeAllFixturesSensors(water);
     }
 
     public void logicStep(float delta){
+        if(controller.left){
+            player.applyForceToCenter(-10, 0, true);
+        }else if(controller.right){
+            player.applyForceToCenter(10, 0, true);
+        }else if(controller.up){
+            player.applyForceToCenter(0, 10, true);
+        }else if(controller.down){
+            player.applyForceToCenter(0, -10, true);
+        }
+
         if(isSwimming){
-            player.applyForceToCenter(0, 50, true);
+            player.applyForceToCenter(0, 40, true);
         }
         world.step(delta, 3, 3);
     }
