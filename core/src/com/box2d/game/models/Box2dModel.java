@@ -11,6 +11,7 @@ public class Box2dModel {
     public World world;
 
     private Body bodyd, bodys, bodyk;
+    private Body player;
 
     public boolean isSwimming = false;
 
@@ -18,9 +19,13 @@ public class Box2dModel {
         this.world = new World(new Vector2(0, -10f), true);
         world.setContactListener(new Box2dContactListener(this));
         createFloor();
+//        createObject();
+//        createMovingObject();
 
         BodyFactory bodyFactory = BodyFactory.getInstance(world);
 
+        player = bodyFactory.makeBoxPolyBody(1, 1,
+                2, 2, BodyFactory.RUBBER, BodyDef.BodyType.DynamicBody, false);
 
         Body water = bodyFactory.makeBoxPolyBody(1, -8,
                 40, 4, RUBBER, BodyDef.BodyType.StaticBody);
