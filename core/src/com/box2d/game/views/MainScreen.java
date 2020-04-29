@@ -15,15 +15,15 @@ public class MainScreen implements Screen {
 
     Box2dModel model;
     KeyboardController controller;
-    OrthographicCamera cam;
+    OrthographicCamera camera;
 
     Box2DDebugRenderer debugRenderer;
 
     public MainScreen(Box2dTutorial parent){
         this.parent = parent;
         controller = new KeyboardController();
-        model = new Box2dModel(controller);
-        cam = new OrthographicCamera(32, 24);
+        camera = new OrthographicCamera(32, 24);
+        model = new Box2dModel(controller, camera);
         debugRenderer = new Box2DDebugRenderer(true, true, true,
                 true,true, true);
         this.world = model.world;
@@ -35,7 +35,7 @@ public class MainScreen implements Screen {
         model.logicStep(delta);
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        debugRenderer.render(model.world, cam.combined);
+        debugRenderer.render(model.world, camera.combined);
     }
 
     @Override
