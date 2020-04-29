@@ -38,19 +38,19 @@ public class KeyboardController implements InputProcessor {
         boolean keyProcessed = false;
         switch(keycode){
             case LEFT :
-                left = true;
+                left = false;
                 keyProcessed = true;
                 break;
             case RIGHT :
-                right = true;
+                right = false;
                 keyProcessed = true;
                 break;
             case UP :
-                up = true;
+                up = false;
                 keyProcessed = true;
                 break;
             case DOWN :
-                down = true;
+                down = false;
                 keyProcessed = true;
         }
         return keyProcessed;
