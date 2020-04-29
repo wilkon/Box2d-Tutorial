@@ -1,5 +1,6 @@
 package com.box2d.game.models;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dContactListener;
@@ -14,11 +15,13 @@ public class Box2dModel {
     private Body bodyd, bodys, bodyk;
     private Body player;
     private KeyboardController controller;
+    private OrthographicCamera camera;
 
     public boolean isSwimming = false;
 
-    public Box2dModel(KeyboardController cont){
-        controller = cont;
+    public Box2dModel(KeyboardController controller, OrthographicCamera camera){
+        this.controller = controller;
+        this.camera = camera;
         this.world = new World(new Vector2(0, -10f), true);
         world.setContactListener(new Box2dContactListener(this));
         createFloor();
