@@ -21,6 +21,8 @@ public class Box2dModel {
     private B2dAssetLoader assMan;
 
     public boolean isSwimming = false;
+    public static final int BOING_SOUND = 0;
+    public static final int PING_SOUND = 1;
 
     public Box2dModel(KeyboardController controller, OrthographicCamera camera, B2dAssetLoader assMan){
         this.assMan = assMan;
@@ -76,6 +78,17 @@ public class Box2dModel {
             return true;
         }
         return false;
+    }
+
+    public void playSound(int sound){
+        switch(sound){
+            case BOING_SOUND:
+                assMan.boingSound.play();
+                break;
+            case PING_SOUND:
+                assMan.pingSound.play();
+                break;
+        }
     }
 
     private void createObject(){
