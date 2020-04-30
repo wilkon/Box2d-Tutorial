@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dTutorial;
 import com.box2d.game.controllers.KeyboardController;
@@ -21,15 +22,15 @@ public class MainScreen implements Screen {
 
     Box2DDebugRenderer debugRenderer;
 
-    public Texture playerTexture;
+    public TextureAtlas.AtlasRegion playerTexture;
 
     private SpriteBatch batch;
+    private TextureAtlas atlas;
 
     public MainScreen(Box2dTutorial parent){
         this.parent = parent;
         parent.assMan.queueAddImages();
         parent.assMan.manager.finishLoading();
-        playerTexture = parent.assMan.manager.get("images/player.png");
         controller = new KeyboardController();
         camera = new OrthographicCamera(32, 24);
         model = new Box2dModel(controller, camera, parent.assMan);
@@ -39,6 +40,9 @@ public class MainScreen implements Screen {
 
         batch = new SpriteBatch();
         batch.setProjectionMatrix(camera.combined);
+
+        atlas = parent.assMan.manager.get("images/game.atlas");
+        playerTexture = atlas.findRegion("player");
     }
 
     @Override
