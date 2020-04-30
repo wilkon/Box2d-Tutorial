@@ -4,15 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class B2dAssetLoader {
     public final AssetManager manager = new AssetManager();
 
-    public final String playerImage = "images/player.png";
-    public final String enemyImage = "images/enemy.png";
     public final String gameImages = "images/game.atlas";
     public final String loadingImages = "images/loading.atlas";
 
@@ -25,8 +22,6 @@ public class B2dAssetLoader {
 
     public void queueAddImages(){
         manager.load(gameImages, TextureAtlas.class);
-        manager.load(playerImage, Texture.class);
-        manager.load(enemyImage, Texture.class);
     }
     public void queueAddSounds(){
         boingSound = Gdx.audio.newSound(Gdx.files.internal("sounds/boing.wav"));
