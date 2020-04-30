@@ -24,6 +24,12 @@ public class Box2dTutorial extends Game {
 		loadingScreen = new LoadingScreen(this);
 		appPreferences=new AppPreferences();
 		setScreen(loadingScreen);
+
+		assMan.queueAddMusic();
+		assMan.manager.finishLoading();
+
+		assMan.gameMusic.setLooping(true);
+		assMan.gameMusic.play();
 	}
 
 	@Override
@@ -62,6 +68,6 @@ public class Box2dTutorial extends Game {
 
 	@Override
 	public void dispose () {
-
+		assMan.manager.dispose();
 	}
 }
