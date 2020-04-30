@@ -16,10 +16,12 @@ public class LoadingScreen implements Screen {
 
     TextureAtlas atlas;
     TextureAtlas.AtlasRegion title, dash;
+    Animation flameAnimation;
 
     SpriteBatch batch;
 
     int currentLoadingStage = 0;
+    float countdown = 5f, stateTime=0f;
     public static final int IMAGE=0, FONT=1, PARTY=2, SOUND=3, MUSIC=4;
 
     public LoadingScreen(Box2dTutorial parent){
@@ -37,6 +39,10 @@ public class LoadingScreen implements Screen {
         title = atlas.findRegion("staying-alight-logo");
         dash = atlas.findRegion("loading-dash");
 
+        flameAnimation = new Animation(0.07f,
+                atlas.findRegions("flames/flames"),
+                Animation.PlayMode.LOOP);
+
         parent.assMan.queueAddImages();
         System.out.println("Loading images...");
     }
@@ -47,7 +53,14 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        stateTime += delta;
+
+        System.out.println("Flame frame length: " + flameAnimation.getKeyFrames().length);
+        TextureRegion currentFrame = (TextureRegion) flameAnimation.getKeyFrame(stateTime, true);
+
+
         batch.begin();
+        drawLoadingBar(currentLoadingStage * 2, currentFrame);
         batch.draw(title, 135, 250);
         batch.end();
 
@@ -81,6 +94,15 @@ public class LoadingScreen implements Screen {
                     parent.switchScreen(MENU);
                 }
             }
+        }
+    }
+
+    private void drawLoadingBar(int stage, TextureRegion currentFrame){
+        for(int i=0; i<stage; i++){
+            batch.draw(currentFrame, 50 + (i * 50), 150,
+                    50, 50);
+            batch.draw(currentFrame, 35 + (i*50), 140,
+                    80, 80);
         }
     }
 
