@@ -32,7 +32,7 @@ public class MainScreen implements Screen {
         playerTexture = parent.assMan.manager.get("images/player.png");
         controller = new KeyboardController();
         camera = new OrthographicCamera(32, 24);
-        model = new Box2dModel(controller, camera);
+        model = new Box2dModel(controller, camera, parent.assMan);
         debugRenderer = new Box2DDebugRenderer(true, true, true,
                 true,true, true);
         this.world = model.world;

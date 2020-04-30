@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.box2d.game.Box2dContactListener;
 import com.box2d.game.controllers.KeyboardController;
 import com.box2d.game.factories.BodyFactory;
+import com.box2d.game.loaders.B2dAssetLoader;
 
 import static com.box2d.game.factories.BodyFactory.*;
 
@@ -17,10 +18,12 @@ public class Box2dModel {
     public Body player;
     private KeyboardController controller;
     private OrthographicCamera camera;
+    private B2dAssetLoader assMan;
 
     public boolean isSwimming = false;
 
-    public Box2dModel(KeyboardController controller, OrthographicCamera camera){
+    public Box2dModel(KeyboardController controller, OrthographicCamera camera, B2dAssetLoader assMan){
+        this.assMan = assMan;
         this.controller = controller;
         this.camera = camera;
         this.world = new World(new Vector2(0, -10f), true);
@@ -39,6 +42,9 @@ public class Box2dModel {
         water.setUserData("IAMTHESEA");
 
         bodyFactory.makeAllFixturesSensors(water);
+
+        assMan.queueAddSounds();
+        assMan.manager.finishLoading();
     }
 
     public void logicStep(float delta){
