@@ -17,11 +17,15 @@ import static com.box2d.game.constants.GameViews.*;
 public class MenuScreen implements Screen {
     private Box2dTutorial parent;
     private Stage stage;
+    private Skin skin;
 
     public MenuScreen(Box2dTutorial parent){
         this.parent = parent;
         this.stage = new Stage(new ScreenViewport());
 
+        parent.assMan.queueAddSkin();
+        parent.assMan.manager.finishLoading();
+        skin = parent.assMan.neonSkin;
     }
 
     @Override
@@ -34,8 +38,6 @@ public class MenuScreen implements Screen {
 
         // any input will send a request from stage for response
         Gdx.input.setInputProcessor(stage);
-
-        Skin skin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
 
         TextButton newGame = new TextButton("New Game", skin);
         TextButton preferences = new TextButton("Preferences", skin);
