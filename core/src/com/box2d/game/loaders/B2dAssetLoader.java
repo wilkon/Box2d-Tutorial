@@ -5,6 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class B2dAssetLoader {
@@ -12,6 +13,8 @@ public class B2dAssetLoader {
 
     public final String playerImage = "images/player.png";
     public final String enemyImage = "images/enemy.png";
+    public final String gameImages = "images/game.atlas";
+    public final String loadingImages = "images/loading.atlas";
 
     public Sound boingSound;
     public Sound pingSound;
@@ -21,6 +24,7 @@ public class B2dAssetLoader {
     public Skin neonSkin;
 
     public void queueAddImages(){
+        manager.load(gameImages, TextureAtlas.class);
         manager.load(playerImage, Texture.class);
         manager.load(enemyImage, Texture.class);
     }
@@ -35,5 +39,17 @@ public class B2dAssetLoader {
 
     public void queueAddSkin(){
         neonSkin = new Skin(Gdx.files.internal("skin/neon-ui.json"));
+    }
+
+
+    public void queueAddLoadingImages(){
+        manager.load(loadingImages, TextureAtlas.class);
+    }
+    public void queueAddFonts(){
+
+    }
+
+    public void queueAddParticleEffects(){
+
     }
 }
