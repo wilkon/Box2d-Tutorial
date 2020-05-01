@@ -29,7 +29,7 @@ public class Box2dModel {
         this.controller = controller;
         this.camera = camera;
         this.world = new World(new Vector2(0, -10f), true);
-        world.setContactListener(new Box2dContactListener(this));
+        world.setContactListener(new Box2dContactListener());
         createFloor();
 //        createObject();
 //        createMovingObject();
