@@ -24,7 +24,7 @@ public class PhysicsSystem extends IteratingSystem {
     private ComponentMapper<TransformComponent> transformCompMapper
             = ComponentMapper.getFor(TransformComponent.class);
 
-    public PhysicsSystem() {
+    public PhysicsSystem(World world) {
         super(Family.all(B2dBodyComponent.class, TransformComponent.class).get());
         this.world = world;
         this.bodiesQueue = new Array<Entity>();
