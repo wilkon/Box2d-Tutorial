@@ -10,6 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class B2dAssetLoader {
     public final AssetManager manager = new AssetManager();
 
+    private String textureAtlas = "images/loading.atlas";
+
     public final String gameImages = "images/game.atlas";
     public final String loadingImages = "images/loading.atlas";
 

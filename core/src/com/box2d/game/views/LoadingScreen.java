@@ -7,6 +7,11 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.box2d.game.Box2dTutorial;
 
 import static com.box2d.game.constants.GameViews.*;
@@ -15,8 +20,13 @@ public class LoadingScreen implements Screen {
     private Box2dTutorial parent;
 
     TextureAtlas atlas;
-    TextureAtlas.AtlasRegion title, dash;
+    TextureAtlas.AtlasRegion title, dash, copyright, background;
     Animation flameAnimation;
+    private Stage stage;
+
+    Image titleImage, copyrightImage;
+    Table table;
+    Table loadingTable;
 
     SpriteBatch batch;
 
@@ -26,25 +36,45 @@ public class LoadingScreen implements Screen {
 
     public LoadingScreen(Box2dTutorial parent){
         this.parent = parent;
-        batch = new SpriteBatch();
-        batch.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
+        stage = new Stage(new ScreenViewport());
+
+        parent.assMan.queueAddLoadingImages();
+        parent.assMan.manager.finishLoading();
+        atlas = parent.assMan.manager.get("images/loading.atlas", TextureAtlas.class);
+
+        loadAssets();
+        parent.assMan.queueAddImages();
+        System.out.println("loading images");
     }
 
     @Override
     public void show() {
-        parent.assMan.queueAddLoadingImages();
-        parent.assMan.manager.finishLoading();
+        titleImage = new Image(title);
+        copyrightImage = new Image(copyright);
 
-        atlas = parent.assMan.manager.get("images/loading.atlas");
-        title = atlas.findRegion("staying-alight-logo");
-        dash = atlas.findRegion("loading-dash");
+        table = new Table();
+        table.setFillParent(true);
+        table.setDebug(false);
 
-        flameAnimation = new Animation(0.07f,
-                atlas.findRegions("flames/flames"),
-                Animation.PlayMode.LOOP);
+        loadingTable = new Table();
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
+        loadingTable.add(new LoadingBarPart(dash, flameAnimation));
 
-        parent.assMan.queueAddImages();
-        System.out.println("Loading images...");
+        table.add(titleImage).align(Align.center).pad(10, 0, 0, 0).colspan(10);
+        table.row();
+        table.add(loadingTable).width(400);
+        table.row();
+        table.add(copyrightImage).align(Align.center).pad(10, 0, 0, 0).colspan(0);
+
+        stage.addActor(table);
     }
 
     @Override
@@ -53,19 +83,12 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        stateTime += delta;
-
-        System.out.println("Flame frame length: " + flameAnimation.getKeyFrames().length);
-        TextureRegion currentFrame = (TextureRegion) flameAnimation.getKeyFrame(stateTime, true);
-
-
-        batch.begin();
-        drawLoadingBar(currentLoadingStage * 2, currentFrame);
-        batch.draw(title, 135, 250);
-        batch.end();
-
         if(parent.assMan.manager.update()){
             currentLoadingStage += 1;
+            if(currentLoadingStage <= 5){
+                loadingTable.getCells().get((currentLoadingStage-1)*2).getActor().setVisible(true);
+                loadingTable.getCells().get((currentLoadingStage-1)*2+1).getActor().setVisible(true);
+            }
             switch(currentLoadingStage){
                 case FONT:
                     System.out.println("Loading fonts...");
@@ -95,6 +118,21 @@ public class LoadingScreen implements Screen {
                 }
             }
         }
+        stage.act();
+        stage.draw();
+    }
+
+    private void loadAssets(){
+        background = atlas.findRegion("flamebackground");
+        copyright = atlas.findRegion("copyright");
+
+        parent.assMan.queueAddLoadingImages();
+        parent.assMan.manager.finishLoading();
+
+        title = atlas.findRegion("staying-alight-logo");
+        dash = atlas.findRegion("loading-dash");
+        flameAnimation = new Animation(0.07f, atlas.findRegions("flames/flames"),
+                Animation.PlayMode.LOOP);
     }
 
     private void drawLoadingBar(int stage, TextureRegion currentFrame){
