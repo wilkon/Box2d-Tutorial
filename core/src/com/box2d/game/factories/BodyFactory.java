@@ -8,10 +8,9 @@ public class BodyFactory {
     public static final int WOOD = 1;
     public static final int RUBBER = 2;
     public static final int STONE = 3;
+    private static World world;
 
-    private World world;
-
-    private final float DEG_TO_RAD = 0.0174533f;
+    private static final float DEG_TO_RAD = 0.0174533f;
 
     private static BodyFactory thisInstance;
 
@@ -60,8 +59,8 @@ public class BodyFactory {
         return fixtureDef;
     }
 
-    public Body makeCirclePolyBody(float posx, float posy, float radius, int material,
-                                   BodyDef.BodyType bodyType, boolean fixedRotation){
+    public static Body makeCirclePolyBody(float posx, float posy, float radius, int material,
+                                          BodyDef.BodyType bodyType, boolean fixedRotation){
         BodyDef boxBodyDef = new BodyDef();
         boxBodyDef.type = bodyType;
         boxBodyDef.position.x = posx;
@@ -77,13 +76,13 @@ public class BodyFactory {
     }
 
     /** with dynamic body and fixed rotation */
-    public Body makeCirclePolyBody(float posx, float posy, float radius, int material){
+    public static Body makeCirclePolyBody(float posx, float posy, float radius, int material){
         return makeCirclePolyBody(posx, posy,
                 radius, material,
                 BodyDef.BodyType.DynamicBody, true);
     }
 
-    public Body makeBoxPolyBody(float posx, float posy,
+    public static Body makeBoxPolyBody(float posx, float posy,
                                 float width, float height,
                                 int material, BodyDef.BodyType bodyType, boolean fixedRotation){
 
@@ -103,7 +102,7 @@ public class BodyFactory {
     }
 
     /** body with without fixed rotation */
-    public Body makeBoxPolyBody(float posx, float posy,
+    public static Body makeBoxPolyBody(float posx, float posy,
                                 float width, float height,
                                 int material, BodyDef.BodyType bodyType){
         return makeBoxPolyBody(posx, posy, width, height, material, bodyType, false);
@@ -111,7 +110,7 @@ public class BodyFactory {
 
     // allowing a combination of several polygons to create one convex version
     // keep in mind the Convex (clean edges) vs Concave (dips on edges)
-    public Body makePolygonShapeBody(Vector2[] vertices, float posx, float posy,
+    public static Body makePolygonShapeBody(Vector2[] vertices, float posx, float posy,
                                      int material, BodyDef.BodyType bodyType){
         BodyDef polyBodyDef = new BodyDef();
         polyBodyDef.type = bodyType;
@@ -126,7 +125,7 @@ public class BodyFactory {
         return polyBody;
     }
 
-    public void makeConSensor(Body body, float size){
+    public static void makeConSensor(Body body, float size){
         FixtureDef fixtureDef = new FixtureDef();
         // fixtureDef.isSensor = true; // using later on
 
