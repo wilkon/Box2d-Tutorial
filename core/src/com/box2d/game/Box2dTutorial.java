@@ -32,11 +32,6 @@ public class Box2dTutorial extends Game {
 		assMan.gameMusic.play();
 	}
 
-	@Override
-	public void render () {
-		super.render();
-	}
-
 	public void switchScreen(int screen){
 		switch(screen){
 			case MENU :
