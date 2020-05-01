@@ -13,7 +13,7 @@ public class PhysicsDebugRenderer extends IteratingSystem {
     private World world;
     private OrthographicCamera camera;
 
-    public PhysicsDebugRenderer(Family family) {
+    public PhysicsDebugRenderer(World world, OrthographicCamera camera) {
         super(Family.all().get());
         debugRenderer = new Box2DDebugRenderer();
         this.world = world;
