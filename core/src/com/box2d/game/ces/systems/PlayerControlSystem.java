@@ -64,7 +64,7 @@ public class PlayerControlSystem extends IteratingSystem {
         if(controller.up && isNormalOrMoving){
             //b2body.body.applyForceTocenter(0, 3000, true);
             b2body.body.applyLinearImpulse(
-                    0, 75f,
+                    0, 12f,
                     b2body.body.getWorldCenter().x,
                     b2body.body.getWorldCenter().y,
                     true);
