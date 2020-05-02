@@ -154,27 +154,22 @@ public class MainScreen implements Screen {
     public void resize(int width, int height) {
 
     }
-
     @Override
     public void show() {
         Gdx.input.setInputProcessor(controller);
     }
-
     @Override
     public void pause() {
 
     }
-
     @Override
     public void resume() {
         Gdx.input.setInputProcessor(controller);
     }
-
     @Override
     public void hide() {
 
     }
-
     @Override
     public void dispose() {
 
