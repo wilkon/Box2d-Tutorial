@@ -65,6 +65,14 @@ public class MainScreen implements Screen {
         engine.addSystem(new PhysicsDebugRenderer(world, renderingSystem.getCamera()));
         engine.addSystem(new CollisionSystem());
         engine.addSystem(new PlayerControlSystem(controller));
+
+        createPlayer();
+        createPlatform(2,2);
+        createPlatform(2,7);
+        createPlatform(7,2);
+        createPlatform(7,7);
+
+        createFloor();
     }
 
     @Override
@@ -76,6 +84,70 @@ public class MainScreen implements Screen {
         engine.update(delta);
     }
 
+    private void createPlayer(){
+        Entity entity = engine.createEntity();
+        B2dBodyComponent b2dbody = engine.createComponent(B2dBodyComponent.class);
+        TransformComponent position = engine.createComponent(TransformComponent.class);
+        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        PlayerComponent player = engine.createComponent(PlayerComponent.class);
+        CollisionComponent collComp = engine.createComponent(CollisionComponent.class);
+        TypeComponent type = engine.createComponent(TypeComponent.class);
+        StateComponent stateComp = engine.createComponent(StateComponent.class);
+
+        b2dbody.body = BodyFactory.makeCirclePolyBody(10, 10, 1, BodyFactory.STONE);
+
+        position.position.set(10, 10, 0);
+        texture.region = atlas.findRegion("player");
+        type.type = TypeComponent.PLAYER;
+        stateComp.set(StateComponent.STATE_NORMAL);
+        b2dbody.body.setUserData(entity);
+
+        entity.add(b2dbody);
+        entity.add(position);
+        entity.add(texture);
+        entity.add(player);
+        entity.add(collComp);
+        entity.add(type);
+        entity.add(stateComp);
+
+        engine.addEntity(entity);
+    }
+
+    private void createPlatform(float x, float y){
+        Entity entity = engine.createEntity();
+        B2dBodyComponent b2dBody = engine.createComponent(B2dBodyComponent.class);
+        b2dBody.body = BodyFactory.makeBoxPolyBody(x, y,
+                3, 0.2f,
+                BodyFactory.STONE, BodyDef.BodyType.StaticBody);
+        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        texture.region = atlas.findRegion("player");
+        TypeComponent type = engine.createComponent(TypeComponent.class);
+        type.type = TypeComponent.SCENERY;
+        b2dBody.body.setUserData(entity);
+
+        entity.add(b2dBody);
+        entity.add(texture);
+        entity.add(type);
+
+        engine.addEntity(entity);
+    }
+
+    private void createFloor(){
+        Entity entity = engine.createEntity();
+        B2dBodyComponent b2dBody = engine.createComponent(B2dBodyComponent.class);
+        b2dBody.body = BodyFactory.makeBoxPolyBody(0, 0, 100, 0.2f, BodyFactory.STONE, BodyDef.BodyType.StaticBody);
+        TextureComponent texture = engine.createComponent(TextureComponent.class);
+        texture.region = atlas.findRegion("player");
+        TypeComponent type = engine.createComponent(TypeComponent.class);
+        type.type = TypeComponent.SCENERY;
+
+        b2dBody.body.setUserData(entity);
+
+        entity.add(b2dBody);
+        entity.add(texture);
+        entity.add(type);
+
+        engine.addEntity(entity);
     }
 
     @Override
